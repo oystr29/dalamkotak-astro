@@ -2,6 +2,10 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import DalamkotakLogo from '~/components/icon/DalamkotakLogo.astro';
+import InstagramSvg from '~/assets/platforms/instagram.svg.astro';
+import GithubSvg from '~/assets/platforms/github.svg.astro';
+import GitlabSvg from '~/assets/platforms/gitlab.svg.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
@@ -10,41 +14,93 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body>
-		<Header title={SITE_TITLE} />
+	<body class="h-screen bg-gradient-to-b from-indigo-900 to-gray-900">
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to
-				build a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like
-				Tailwind, React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/pages/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<div class="flex h-screen w-full items-center justify-center p-4 align-middle text-slate-200">
+				<DalamkotakLogo />
+				<div class="px-4 py-4 text-center md:py-0 md:text-left">
+            <h1 class="text-4xl mb-4 font-bold leading-none">Dalamkotak Website</h1>
+
+            <h1 class="text-2xl font-bold">oystr things</h1>
+            <a href="/blog">
+              <h3 class="text-xl">Blog</h3>
+            </a>
+            <h1 class="text-2xl font-bold">Support oystr</h1>
+            <a href="https://trakteer.id/oktavian_yoga/tip" target="_blank">
+              <h3 class="text-xl">Trakteer</h3>
+            </a>
+          </div>
+
+        <div class="absolute bottom-0 flex h-16 gap-6 p-4 text-slate-200">
+          <a
+          	target="_blank"
+            href="https://www.instagram.com/oystr_29/"
+            class="flex gap-2 align-baseline"
+          >
+            <InstagramSvg />
+            <span class="hidden md:block">Instagram</span>
+          </a>
+          <a
+          	target="_blank"
+          	href="https://github.com/oktoala" class="flex gap-2 align-baseline">
+            <GithubSvg />
+            <span class="hidden md:block">Github</span>
+          </a>
+          <a
+          	target="_blank"
+          	href="https://gitlab.com/oktavian_yoga" class="flex gap-2 align-baseline">
+            <GitlabSvg />
+            <span class="hidden md:block">Gitlab</span>
+          </a>
+        </div>
+				
+			</div>
+			
 		</main>
-		<Footer />
+		<!-- <Footer /> -->
 	</body>
 </html>
+
+<style>
+<style>
+  .title {
+    font-family: "Inter", sans-serif;
+  }
+
+ /* background */
+  main {
+    position: relative;
+    overflow: hidden;
+  }
+  a {
+    @apply text-slate-200 hover:text-slate-100 hover:underline;
+  }
+ /* Create the animation */
+  @keyframes breathing {
+    0% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.03;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+
+  main::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23300171' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+
+    transform: rotate(180deg);
+
+    /* animate opacity */
+    animation: breathing 15s ease-in-out infinite;
+  }
+</style>
