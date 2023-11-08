@@ -1,95 +1,120 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import BaseHead from '~/components/BaseHead.astro';
-import TailIn from '~/components/svg/tail-in.astro';
-import TailOut from '~/components/svg/tail-out.astro';
-import Checkcheck from '~/components/svg/check-check.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import BaseHead from "~/components/BaseHead.astro";
+import TailIn from "~/components/svg/tail-in.astro";
+import TailOut from "~/components/svg/tail-out.astro";
+import Checkcheck from "~/components/svg/check-check.astro";
 ---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={"Frequenly Asked Question"} description={"Intinya QnA lah"} />
-	</head>
-	<body transition:animate="slide" class="container overflow-hidden relative mx-auto bg-gray-950 text-white">
-		<div class="bgchat bg-gray-700 absolute top-0 opacity-30 h-full bg-repeat w-full left-0" />
-		<header class="h-16 py-2 px-4 relative flex items-center w-full z-10 bg-gray-800">
-			<div class="px-1 py-2 mr-3 rounded-full text-white bg-gray-600">FAQ</div>
-			<p class="flex grow">Frequenly Asked Question</p>
-		</header>
-	  <main class="h-full py-2 px-20 min-h-screen overflow-y-auto">
-	  	<div class="flex items-center justify-start">
-	  		<div class="relative w-max mb-2">
-	  		<span class="tail-in text-gray-950">
-	  			<TailIn />
-	  		</span>
-	  		<div class="chat-in rounded-lg bg-gray-950 relative">
-	  				Halloo
-	  				<div class="float-right text-[11px] text-gray-400 mt-3 ml-2 mr-0 relative">
-	  					21:30
-	  				</div>
-	  		</div>
-	  	</div>
-	  	</div>
-	  	
-	  	<div class="flex items-center justify-end">
-	  		<div class="relative w-max mb-5">
-	  		<span class="tail-out text-indigo-500">
-	  			<TailOut />
-	  		</span>
-	  		<div class="chat-out rounded-lg bg-indigo-500">
-	  				Hallo Juga
-	  				<div class="float-right text-[11px] text-gray-200 mt-3 ml-2 mr-0 relative">
-	  					<div class="flex items-center">
-	  						<div class="mr-0.5">21:30</div>
-	  						<span>
-	  							<Checkcheck />
-	  						</span>
-	  					</div>
-	  				</div>
-	  		</div>
-	  	</div>
-	  	</div>
-	  	
+  <head>
+    <BaseHead
+      title={"Frequenly Asked Question"}
+      description={"Intinya QnA lah"}
+    />
+  </head>
+  <body transition:animate="slide" class="bg-gray-950">
+    <div
+      class="flex flex-col min-h-screen max-h-screen mx-auto container bg-gray-950 text-white"
+    >
+      <!-- Lower -->
+      <div class="flex flex-1 overflow-hidden">
+        <div class="flex flex-col flex-1">
+          <!-- Navigation -->
+          <header
+            class="h-16 py-2 px-4 relative flex items-center w-full z-10 bg-gray-800"
+          >
+            <div class="px-1 py-2 mr-3 rounded-full text-white bg-gray-600">
+              FAQ
+            </div>
+            <p class="flex grow">Frequenly Asked Question</p>
+          </header>
 
-		</main>
-	</body>
+          <!-- Scrollable Content -->
+          <div class="bgchat flex flex-1 p-8 overflow-x-hidden overflow-y-auto">
+            <div class="flex-auto">
+              {
+                Array.from({ length: 25 }, (_, i) => i).map(() => (
+                  <>
+                    <div class="flex items-center justify-start">
+                      <div class="relative w-max mb-2">
+                        <span class="tail-in text-gray-950">
+                          <TailIn />
+                        </span>
+                        <div class="chat-in rounded-lg bg-gray-950 relative">
+                          Halloo
+                          <div class="float-right text-[11px] text-gray-400 mt-3 ml-2 mr-0 relative">
+                            21:30
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-end">
+                      <div class="relative w-max mb-5">
+                        <span class="tail-out text-indigo-500">
+                          <TailOut />
+                        </span>
+                        <div class="chat-out rounded-lg bg-indigo-500">
+                          Hallo Juga
+                          <div class="float-right text-[11px] text-gray-200 mt-3 ml-2 mr-0 relative">
+                            <div class="flex items-center">
+                              <div class="mr-0.5">21:30</div>
+                              <span>
+                                <Checkcheck />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+      body {
+        background-color: black;
+      }
+      .bgchat {
+        background-image: url("/bg-chat.png");
+      }
+
+      span.tail-in {
+        position: absolute;
+        top: 0;
+        left: -8px;
+        z-index: 10;
+        display: block;
+        width: 8px;
+        height: 13px;
+      }
+
+      .chat-in {
+        border-radius: 8px;
+        border-top-left-radius: 0;
+        padding: 5px 10px;
+      }
+
+      span.tail-out {
+        position: absolute;
+        top: 0;
+        right: -8px;
+        z-index: 10;
+        display: block;
+        width: 8px;
+        height: 13px;
+      }
+
+      .chat-out {
+        border-radius: 8px;
+        border-top-right-radius: 0;
+        padding: 5px 10px;
+      }
+    </style>
+  </body>
 </html>
-
-<style>
-.bgchat {
-	background-image: url('/bg-chat.png');
-}
-
-span.tail-in {
-	position: absolute;
-    top: 0;
-  left: -8px;
-    z-index: 10; 
-    display: block;
-    width: 8px;
-    height: 13px;
-}
-
-.chat-in {
-	border-radius: 8px;
-	border-top-left-radius: 0;
-	padding: 5px 10px;
-}
-
-span.tail-out {
-	position: absolute;
-    top: 0;
-  right: -8px;
-    z-index: 10; 
-    display: block;
-    width: 8px;
-    height: 13px;
-}
-
-.chat-out {
-	border-radius: 8px;
-	border-top-right-radius: 0;
-	padding: 5px 10px;
-}
-
-</style>
