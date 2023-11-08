@@ -4,6 +4,7 @@ import BaseHead from "~/components/BaseHead.astro";
 import TailIn from "~/components/svg/tail-in.astro";
 import TailOut from "~/components/svg/tail-out.astro";
 import Checkcheck from "~/components/svg/check-check.astro";
+import DalamkotakSvg from "~/components/icon/DalamkotakLogo.astro";
 ---
 
 <!doctype html>
@@ -14,35 +15,58 @@ import Checkcheck from "~/components/svg/check-check.astro";
       description={"Intinya QnA lah"}
     />
   </head>
-  <body transition:animate="slide" class="bg-gray-950">
+  <body
+    transition:animate="slide"
+    class="bg-gray-950 scrollbar-thin scrollbar-track-gray-950 scrollbar-thumb-white"
+  >
     <div
-      class="flex flex-col min-h-screen max-h-screen mx-auto container bg-gray-950 text-white"
+      class="flex flex-col min-h-screen mx-auto relative container bg-gray-950 text-white"
     >
       <!-- Lower -->
-      <div class="flex flex-1 overflow-hidden">
-        <div class="flex flex-col flex-1">
+      <div class="flex flex-1 overflow-hidden relative">
+        <div class="flex flex-col flex-1 relative">
           <!-- Navigation -->
           <header
-            class="h-16 py-2 px-4 relative flex items-center w-full z-10 bg-gray-800"
+            class="h-16 py-2 px-4 flex items-center z-20 fixed container mx-auto w-full bg-gray-800"
           >
-            <div class="px-1 py-2 mr-3 rounded-full text-white bg-gray-600">
-              FAQ
+            <a href="/" class="p-1 hover:bg-gray-900 rounded-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-chevron-left"
+                ><path d="m15 18-6-6 6-6"></path></svg
+              >
+            </a>
+
+            <div
+              class="h-10 w-10 mx-3 rounded-full flex items-center justify-center text-white bg-gray-600"
+            >
+              <DalamkotakSvg className="w-8 h-8" />
             </div>
             <p class="flex grow">Frequenly Asked Question</p>
           </header>
 
           <!-- Scrollable Content -->
-          <div class="bgchat flex flex-1 p-8 overflow-x-hidden overflow-y-auto">
+          <div
+            class="bgchat flex flex-1 relative p-8 pt-20 overflow-x-hidden overflow-y-auto"
+          >
             <div class="flex-auto">
               {
                 Array.from({ length: 25 }, (_, i) => i).map(() => (
                   <>
                     <div class="flex items-center justify-start">
                       <div class="relative w-max mb-2">
-                        <span class="tail-in text-gray-950">
+                        <span class="tail-in text-gray-900">
                           <TailIn />
                         </span>
-                        <div class="chat-in rounded-lg bg-gray-950 relative">
+                        <div class="chat-in rounded-lg bg-gray-900 relative">
                           Halloo
                           <div class="float-right text-[11px] text-gray-400 mt-3 ml-2 mr-0 relative">
                             21:30
@@ -80,8 +104,22 @@ import Checkcheck from "~/components/svg/check-check.astro";
       body {
         background-color: black;
       }
-      .bgchat {
+
+      .bgchat::before {
+        content: "";
         background-image: url("/bg-chat.png");
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-position: center;
+        opacity: 0.2;
+        position: absolute;
+        display: block;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
       }
 
       span.tail-in {

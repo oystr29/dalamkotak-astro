@@ -1,54 +1,71 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
 <svg
-	width="40.5"
-	height="34.5"
-	viewBox="0 0 538 456"
-	xmlns="http://www.w3.org/2000/svg"
-	class="w-72 h-72"
-> 
-	<!-- <linearGradient id="gradient"> -->
-	<!-- 	<stop class="secondary-color" offset="0%" /> -->
-	<!-- 	<stop class="third-color" offset="100%" /> -->
-	<!-- </linearGradient> -->
-	<!-- <linearGradient id="gradient-hover"> -->
-	<!-- 	<stop class="secondary-color" offset="0%" /> -->
-	<!-- 	<stop class="primary-color" offset="100%" /> -->
-	<!-- </linearGradient> -->
-	<path
-		id="Vector"
-		d="M269.379 0.115814L105.28 95.7821L269.379 191.448L433.536 95.7821L269.379 0.115814Z"
-	/>
-	<path id="Vector_2" d="M96.1111 108.737V300.066L261.876 395.757V204.429L96.1111 108.737Z" />
-	<path id="Vector_3" d="M442.695 109.117L276.93 204.808V396.137L442.695 300.446V109.117Z" />
-	<path id="Vector_4" d="M457.399 296.154V209.092L533.168 252.623L457.399 296.154Z" />
-	<path id="Vector_5" d="M81.0563 295.783V208.722L5.28702 252.253L81.0563 295.783Z" />
-	<path
-		id="Vector_6"
-		d="M453.832 310.242L284.579 407.575L369.801 456.112L538.489 359.09L538.077 358.832L538.644 358.523L453.832 310.242Z"
-	/>
-	<path
-		id="Vector_7"
-		d="M85.3439 311.609L0.632599 360.015L1.1987 360.324L0.786531 360.582L169.28 457.859L254.403 409.195L85.3439 311.609Z"
-	/>
+  width="40.5"
+  height="34.5"
+  viewBox="0 0 538 456"
+  xmlns="http://www.w3.org/2000/svg"
+  class={className ?? "w-72 h-72"}
+>
+  <!-- <linearGradient id="gradient"> -->
+  <!-- 	<stop class="secondary-color" offset="0%" /> -->
+  <!-- 	<stop class="third-color" offset="100%" /> -->
+  <!-- </linearGradient> -->
+  <!-- <linearGradient id="gradient-hover"> -->
+  <!-- 	<stop class="secondary-color" offset="0%" /> -->
+  <!-- 	<stop class="primary-color" offset="100%" /> -->
+  <!-- </linearGradient> -->
+  <path
+    id="Vector"
+    d="M269.379 0.115814L105.28 95.7821L269.379 191.448L433.536 95.7821L269.379 0.115814Z"
+  ></path>
+  <path
+    id="Vector_2"
+    d="M96.1111 108.737V300.066L261.876 395.757V204.429L96.1111 108.737Z"
+  ></path>
+  <path
+    id="Vector_3"
+    d="M442.695 109.117L276.93 204.808V396.137L442.695 300.446V109.117Z"></path>
+  <path
+    id="Vector_4"
+    d="M457.399 296.154V209.092L533.168 252.623L457.399 296.154Z"></path>
+  <path
+    id="Vector_5"
+    d="M81.0563 295.783V208.722L5.28702 252.253L81.0563 295.783Z"></path>
+  <path
+    id="Vector_6"
+    d="M453.832 310.242L284.579 407.575L369.801 456.112L538.489 359.09L538.077 358.832L538.644 358.523L453.832 310.242Z"
+  ></path>
+  <path
+    id="Vector_7"
+    d="M85.3439 311.609L0.632599 360.015L1.1987 360.324L0.786531 360.582L169.28 457.859L254.403 409.195L85.3439 311.609Z"
+  ></path>
 </svg>
 
 <style>
-	svg {
-		fill: white;
-	}
-	
-	.primary-color {
-		stop-color: #5ff9ff;
-	}
-	.secondary-color {
-		stop-color: #34e3af;
-	}
-	.third-color {
-		stop-color: #29b58b;
-	}
-	.fourth-color {
-		stop-color: #feb16d;
-	}
-	.fifth-color {
-		stop-color: #b63a69;
-	}
+  svg {
+    fill: white;
+  }
+
+  .primary-color {
+    stop-color: #5ff9ff;
+  }
+  .secondary-color {
+    stop-color: #34e3af;
+  }
+  .third-color {
+    stop-color: #29b58b;
+  }
+  .fourth-color {
+    stop-color: #feb16d;
+  }
+  .fifth-color {
+    stop-color: #b63a69;
+  }
 </style>
