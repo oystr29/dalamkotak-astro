@@ -1,39 +1,50 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import DalamkotakLogo from '~/components/icon/DalamkotakLogo.astro';
-import InstagramSvg from '~/assets/platforms/instagram.svg.astro';
-import GithubSvg from '~/assets/platforms/github.svg.astro';
-import GitlabSvg from '~/assets/platforms/gitlab.svg.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import DalamkotakLogo from "~/components/icon/DalamkotakLogo.astro";
+import InstagramSvg from "~/assets/platforms/instagram.svg.astro";
+import GithubSvg from "~/assets/platforms/github.svg.astro";
+import GitlabSvg from "~/assets/platforms/gitlab.svg.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body transition:animate="slide" class="h-screen bg-gradient-to-b from-indigo-900 to-gray-900">
-		<main>
-			<div class="flex h-screen w-full items-center justify-center p-4 align-middle text-slate-200">
-				<DalamkotakLogo />
-				<div class="px-4 py-4 text-center md:py-0 md:text-left">
-            <h1 class="text-4xl mb-4 font-bold leading-none">Dalamkotak Website</h1>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body
+    transition:animate="slide"
+    class="h-screen bg-gradient-to-b from-indigo-900 to-gray-900"
+  >
+    <main>
+      <div
+        class="flex h-screen w-full items-center justify-center p-4 align-middle text-slate-200"
+      >
+        <DalamkotakLogo />
+        <div class="px-4 py-4 text-center md:py-0 md:text-left">
+          <h1 class="text-4xl mb-4 font-bold leading-none">
+            Dalamkotak Website
+          </h1>
 
-            <h1 class="text-2xl font-bold">MyThings</h1>
-            <a href="/faq">
-              <h3 class="text-xl">FAQ</h3>
-            </a>
-            <h1 class="text-2xl font-bold">Support oystr</h1>
-            <a href="https://trakteer.id/oktavian_yoga/tip" target="_blank">
-              <h3 class="text-xl">Trakteer</h3>
-            </a> 
-          </div>
+          <h1 class="text-2xl font-bold">MyThings</h1>
+          <a href="/blog">
+            <h3 class="text-xl">Blog</h3>
+          </a>
+          <a href="/faq">
+            <h3 class="text-xl">FAQ</h3>
+          </a>
+
+          <h1 class="text-2xl font-bold">Support oystr</h1>
+          <a href="https://trakteer.id/oktavian_yoga/tip" target="_blank">
+            <h3 class="text-xl">Trakteer</h3>
+          </a>
+        </div>
 
         <div class="absolute bottom-0 flex h-16 gap-6 p-4 text-slate-200">
           <a
-          	target="_blank"
+            target="_blank"
             href="https://www.instagram.com/oystr_29/"
             class="flex gap-2 align-baseline"
           >
@@ -41,66 +52,65 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
             <span class="hidden md:block">Instagram</span>
           </a>
           <a
-          	target="_blank"
-          	href="https://github.com/oktoala" class="flex gap-2 align-baseline">
+            target="_blank"
+            href="https://github.com/oktoala"
+            class="flex gap-2 align-baseline"
+          >
             <GithubSvg />
             <span class="hidden md:block">Github</span>
           </a>
           <a
-          	target="_blank"
-          	href="https://gitlab.com/oktavian_yoga" class="flex gap-2 align-baseline">
+            target="_blank"
+            href="https://gitlab.com/oktavian_yoga"
+            class="flex gap-2 align-baseline"
+          >
             <GitlabSvg />
             <span class="hidden md:block">Gitlab</span>
           </a>
         </div>
-				
-			</div>
-			
-		</main>
-		<!-- <Footer /> -->
-	</body>
+      </div>
+    </main>
+    <!-- <Footer /> -->
+  </body><style>
+    <style > .title {
+      font-family: "Inter", sans-serif;
+    }
+
+    /* background */
+    main {
+      position: relative;
+      overflow: hidden;
+    }
+    a {
+      @apply text-slate-200 hover:text-slate-100 hover:underline;
+    }
+    /* Create the animation */
+    @keyframes breathing {
+      0% {
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 0.03;
+      }
+      100% {
+        opacity: 0.3;
+      }
+    }
+
+    main::before {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      z-index: -1;
+      background-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23300171' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+
+      transform: rotate(180deg);
+
+      /* animate opacity */
+      animation: breathing 15s ease-in-out infinite;
+    }
+  </style>
 </html>
-
-<style>
-<style>
-  .title {
-    font-family: "Inter", sans-serif;
-  }
-
- /* background */
-  main {
-    position: relative;
-    overflow: hidden;
-  }
-  a {
-    @apply text-slate-200 hover:text-slate-100 hover:underline;
-  }
- /* Create the animation */
-  @keyframes breathing {
-    0% {
-      opacity: 0.3;
-    }
-    50% {
-      opacity: 0.03;
-    }
-    100% {
-      opacity: 0.3;
-    }
-  }
-
-  main::before {
-    content: "";
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
-    z-index: -1;
-    background-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23300171' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-
-    transform: rotate(180deg);
-
-    /* animate opacity */
-    animation: breathing 15s ease-in-out infinite;
-  }
-</style>

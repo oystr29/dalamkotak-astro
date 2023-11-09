@@ -9,6 +9,6 @@ import netlify from "@astrojs/netlify/functions";
 export default defineConfig({
   site: "https://dalamkotak.com",
   integrations: [mdx(), sitemap(), tailwind()],
-  output: "server",
+  output: "hybrid",
   adapter: netlify(),
 });

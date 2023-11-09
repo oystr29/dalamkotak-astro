@@ -1,7 +1,7 @@
 ---
-title: "First post"
-description: "Lorem ipsum dolor sit amet"
-pubDate: "Jul 08 2022"
+title: "Tech I've been learned in 2023"
+description: "Recap 2023"
+pubDate: "Nov 09 2023"
 heroImage: "/blog-placeholder-3.jpg"
 ---
 
