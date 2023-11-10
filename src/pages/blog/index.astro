@@ -1,13 +1,8 @@
 ---
 import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
-import FormattedDate from "../../components/FormattedDate.astro";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import updateLocale from "dayjs/plugin/updateLocale";
 import "dayjs/locale/id";
 
 dayjs.extend(relativeTime);
@@ -22,7 +17,10 @@ const posts = (await getCollection("blog")).sort(
   <head>
     <BaseHead title={"Blog"} description={"Kumpulan Text aja"} />
   </head>
-  <body transition:animate="slide" class="bg-gray-900 text-white">
+  <body
+    transition:animate="slide"
+    class="bg-gray-900 text-white scrollbar-thin scrollbar-track-gray-900 scrollbar-thumb-white"
+  >
     <main class="container mx-auto mt-10 pb-5">
       <div class="flex items-center justify-center w-full mb-8">
         <h1 class="font-bold text-5xl">Blog</h1>
