@@ -1,0 +1,14 @@
+---
+import BaseHead from "~/components/BaseHead.astro";
+import SemproSlide from "../../components/skripsi/sempro-slide.svelte";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={"Seminar Proposal"} description={"Presentation Slide of Sempro"} />
+  </head>
+  <body class="">
+    <SemproSlide client:only="svelte" />
+  </body>
+</html>

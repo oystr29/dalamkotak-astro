@@ -1,7 +1,5 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import DalamkotakLogo from "~/components/icon/DalamkotakLogo.astro";
 import InstagramSvg from "~/assets/platforms/instagram.svg.astro";
 import GithubSvg from "~/assets/platforms/github.svg.astro";
@@ -14,19 +12,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
-  <body
-    transition:animate="slide"
-    class="h-screen bg-gradient-to-b from-indigo-900 to-gray-900"
-  >
+  <body transition:animate="slide" class="h-screen bg-gradient-to-b from-indigo-900 to-gray-900">
     <main>
-      <div
-        class="flex h-screen w-full items-center justify-center p-4 align-middle text-slate-200"
-      >
+      <div class="flex h-screen w-full items-center justify-center p-4 align-middle text-slate-200">
         <DalamkotakLogo />
         <div class="px-4 py-4 text-center md:py-0 md:text-left">
-          <h1 class="text-4xl mb-4 font-bold leading-none">
-            Dalamkotak Website
-          </h1>
+          <h1 class="text-4xl mb-4 font-bold leading-none">Dalamkotak Website</h1>
 
           <h1 class="text-2xl font-bold">MyThings</h1>
           <a href="/blog">
@@ -51,11 +42,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
             <InstagramSvg />
             <span class="hidden md:block">Instagram</span>
           </a>
-          <a
-            target="_blank"
-            href="https://github.com/oktoala"
-            class="flex gap-2 align-baseline"
-          >
+          <a target="_blank" href="https://github.com/oktoala" class="flex gap-2 align-baseline">
             <GithubSvg />
             <span class="hidden md:block">Github</span>
           </a>
@@ -106,9 +93,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         left: -50%;
         z-index: -1;
         background-image: url("data:image/svg+xml,%3Csvg width='100%' height='100%' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23300171' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-
         transform: rotate(180deg);
-
         /* animate opacity */
         animation: breathing 15s ease-in-out infinite;
       }

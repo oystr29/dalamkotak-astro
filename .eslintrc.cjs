@@ -23,6 +23,8 @@ module.exports = {
         // "astro/no-set-html-directive": "error"
       },
     },
+    { files: ["*.ts", "*.svelte"], parser: "@typescript-eslint/parser" },
+
     // ...
   ],
 };
