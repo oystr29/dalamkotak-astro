@@ -6,6 +6,7 @@
   import "reveal.js/dist/reveal.css";
   import "reveal.js/dist/theme/dracula.css";
   import "reveal.js/plugin/highlight/monokai.css";
+  import '../../styles/global.css';
   import { onMount } from "svelte";
 
   onMount(() => {
@@ -16,7 +17,6 @@
       controls: true,
       progress: true,
       slideNumber: "c/t",
-      p: 30,
     });
 
     deck.initialize({
@@ -40,4 +40,5 @@
   :root {
     --r-main-font-size: 30px;
   }
+ 
 </style>

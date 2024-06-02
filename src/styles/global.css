@@ -1,0 +1,11 @@
+.fragment.opacity {
+  opacity: 0;
+}
+
+.fragment.opacity.visible {
+  opacity: 0.4;
+}
+
+.fragment.opacity.current-fragment {
+  opacity: 1;
+}
