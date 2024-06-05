@@ -525,7 +525,7 @@ Berikut adalah tabel sub-kriteria:
         Masing-masing tabel dicari nilai True Positive (TP), True Negative (TN), False Positive (FP), dan False Negative (FN).
     </li>
     <li class="fragment custom opacity">
-        Kemudian cari nilai accuracy menggunakan persamaan 2.13, precision menggunakan persamaan 2.14, dan recall menggunakan persamaan 2.15 untuk masing-masing label
+        Kemudian cari nilai accuracy, precision, dan recall untuk masing-masing label
     </li>
 </ol>
 
@@ -533,24 +533,62 @@ Berikut adalah tabel sub-kriteria:
 ### Waktu dan Tempat Penelitian
 
 <div class="mermaid">
-    %%{init: { 'logLevel': 'debug', 'theme': 'dark' } }%%
+    %%{init: {  'logLevel': 'debug', 'theme': 'dark' } }%%
     timeline
         April : Pembuatan Proposal 
         Mei : Pembuatan Proposal
-        Juni : Pembuatan Proposal
-        Juli : Twitter
+        Juni : Seminar Proposal : Perbaikan Proposal
+        Juli : Pembuatan Model 
+        Agustus: Pembuatan Model : Pembuatan Sistem
+        September: Pembuatan Sistem : Seminar Hasil : Perbaikan Seminar Hasil : Penulisan Artikel Ilmiah
+        Oktober: Penulisan Artikel Ilmiah
+        November  Seminar Akhir : Perbaikan Seminar Akhir
 </div>
 
 ---
 
 ## Daftar Pustaka
 
-- List
-- List
+<ol class="text-sm">
+    <li>
+        Alexander, N., Widodo, R. B., & Swastika, W. (2023). Penggunaan Machine Learning Dalam Klasifikasi Bahasa Isyarat BISINDO Menggunakan Kamera. Prosiding Seminar Nasional Informatika & Sistem Informasi, 3(1), 11–26.
+    </li>
+    <li>
+        Alita, D., Fernando, Y., & Sulistiani, H. (2020). Implementasi Algoritma Multiclass Svm Pada Opini Publik Berbahasa Indonesia Di Twitter. Jurnal Tekno Kompak, 14(2), 86. https://doi.org/10.33365/jtk.v14i2.792
+    </li>
+    <li>
+        Anam, N. (2022). Sistem Deteksi Simbol Pada Sibi (Sistem Isyarat Bahasa Indonesia) Menggunakan Mediapipe Dan ResNet-50.
+    </li>
+    <li>
+        Aziz, A. N. (2021). Image Recognition Alfabet Bahasa Isyarat Indonesia (Bisindo) Menggunakan Metode Convolutional Neural Network. https://dspace.uii.ac.id/handle/123456789/32137%0Ahttps://dspace.uii.ac.id/bitstream/handle/123456789/32137/17523001 Achmad Noer Aziz.pdf?sequence=1
+    </li>
+    <li>
+        Chusna, N. L., Shalahudin, M. I., Riyanto, U., & Alexander, A. D. (2022). Klasifikasi Citra Jenis Tanaman Jamur Layak Konsumsi Menggunakan Algoritma Multiclass Support Vector Machine. Building of Informatics, Technology and Science (BITS), 4(1), 178–183. https://doi.org/10.47065/bits.v4i1.1624
+    </li>
+    <li>
+        Desiani, A., Akbar, M., Irmeilyana, I., & Amran, A. (2022). Implementasi Algoritma Naïve Bayes dan Support Vector Machine (SVM) Pada Klasifikasi Penyakit Kardiovaskular. Jurnal Teknik Elektro dan Komputasi (ELKOM), 4(2), 207–214. http://jurnal.unmuhjember.ac.id/index.php/ELKOM/article/view/7691
+    </li>
+    <li>
+        Dewi, M., Wahyuningrum, T., & Prasetyo, N. A. (2021). Pengenalan Kata Bahasa Isyarat Indonesia (BISINDO) Menggunakan Augmented Reality (AR). INISTA: Journal of Informatics, Information System, Software Engineering and Applications, 3(2), 53–60. https://journal.ittelkom-pwt.ac.id/index.php/inista/article/view/256
+    </li>
+    <li>
+        Gumelar, G., Hafiar, H., & Subekti, P. (2018). Konstruksi Makna Bisindo Sebagai Budaya Tuli Bagi Anggota Gerkatin. Informasi, 48(1), 65. https://doi.org/10.21831/informasi.v48i1.17727
+    </li>
+    <li>
+        Handayani, A. S., Soim, S., Agusdi, T. E., Rumiasih, & Nurdin, A. (2020). Klasifikasi Kualitas Udara Dengan Metode Support Vector Machine. JIRE (Jurnal Informatika & Rekayasa Elektronika), 3(2), 187–199.
+    </li>
+    <li>
+        Hayati, L. N., Handayani, A. N., Iriantoa, W. S. G., Asmara, R. A., Indra, D., & Fahmi, M. (2023). Classifying BISINDO Alphabet using Tensorflow Object Detection API. Jurnal ILKOM, 15(2), 358–364.
+    </li>
+</ol>
 
 ---
 
 ## Lampiran
+
+<div class="r-stack">
+<img src="/skripsian/img/abjad-bisindo.png" class="w-32" />
+</div>
 
 ---
 
