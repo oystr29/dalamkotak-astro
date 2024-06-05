@@ -3,6 +3,8 @@
   import Markdown from "reveal.js/plugin/markdown/markdown";
   import Highlight from "reveal.js/plugin/highlight/highlight";
   import Notes from "reveal.js/plugin/notes/notes";
+  import Math from "reveal.js/plugin/math/math";
+  import Mermaid from "reveal.js-mermaid-plugin/plugin/mermaid/mermaid";
   import "reveal.js/dist/reveal.css";
   import "reveal.js/dist/theme/dracula.css";
   import "reveal.js/plugin/highlight/monokai.css";
@@ -20,7 +22,7 @@
     });
 
     deck.initialize({
-      plugins: [Markdown, Highlight, Notes],
+      plugins: [Markdown, Highlight, Notes, Math, Mermaid],
     });
   });
 </script>

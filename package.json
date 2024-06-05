@@ -20,6 +20,7 @@
     "astro": "^4.5.12",
     "dayjs": "^1.11.10",
     "reveal.js": "^5.0.5",
+    "reveal.js-mermaid-plugin": "^2.3.0",
     "svelte": "^4.2.12",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.3"

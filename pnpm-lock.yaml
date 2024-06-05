@@ -35,6 +35,9 @@ dependencies:
   reveal.js:
     specifier: ^5.0.5
     version: 5.0.5
+  reveal.js-mermaid-plugin:
+    specifier: ^2.3.0
+    version: 2.3.0
   svelte:
     specifier: ^4.2.12
     version: 4.2.12
@@ -4657,6 +4660,11 @@ packages:
   /reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
+
+  /reveal.js-mermaid-plugin@2.3.0:
+    resolution: {integrity: sha512-61t2jWPCB0+PYsO1lpoUXX7NfhcRwavpEi5r20Au7dEdoYzA3aYwP/vP90mBc+bvCcCPIAgulcixllGob59jkA==}
+    engines: {node: '>=10.0.0'}
+    dev: false
 
   /reveal.js@5.0.5:
     resolution: {integrity: sha512-MPWPV/cRlkZhh72dAGYv/bUCr9ulwM2/ucCqiL/KN4tvhb6VvN49iwOyWHE08wppj8lMQXi2xbS3kyKgfyTYqg==}
