@@ -7,7 +7,7 @@
   import Math from "reveal.js/plugin/math/math";
   import Mermaid from "reveal.js-mermaid-plugin/plugin/mermaid/mermaid";
   import "reveal.js/dist/reveal.css";
-  import "reveal.js/dist/theme/dracula.css";
+  import "reveal.js/dist/theme/white.css";
   import "reveal.js/plugin/highlight/monokai.css";
   import '../../styles/global.css';
   import { onMount } from "svelte";
