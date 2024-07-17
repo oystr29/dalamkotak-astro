@@ -12,4 +12,13 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const chords = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    desc: z.string(),
+    pubDate: z.coerce.date(),
+    img: z.string().optional(),
+  }),
+});
+
+export const collections = { blog, chords };

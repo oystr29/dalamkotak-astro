@@ -1,0 +1,53 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import { getCollection } from "astro:content";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/id";
+
+dayjs.extend(relativeTime);
+
+const chords = (await getCollection("chord")).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={"Kunci Gitar"} description={"Kunci Gitar"} />
+  </head>
+  <body
+    transition:animate="slide"
+    class="bg-gray-900 text-white scrollbar-thin scrollbar-track-gray-900 scrollbar-thumb-white"
+  >
+    <main class="container mx-auto mt-10 pb-5">
+      <div class="flex flex-col items-center justify-center w-full mb-8">
+        <h1 class="font-bold text-5xl">Chord</h1>
+        <h3 class="text-base text-gray-500">
+          just a bunch of guitar chords that internet doesn't provided
+        </h3>
+      </div>
+      <div
+        class="grid grid-cols-1 px-4 md:px-0 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center justify-center"
+      >
+        {
+          chords.map((post) => (
+            <div class="rounded-2xl">
+              <img class="rounded-2xl max-h-64 mb-2" src={post.data.img} />
+              <a
+                href={`/chord/${post.slug}`}
+                class="text-2xl font-semibold hover:underline"
+              >
+                {post.data.title}
+              </a>
+              <div class="capitalize text-sm text-gray-500">
+                {dayjs().to(dayjs(post.data.pubDate))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </main>
+  </body>
+</html>
