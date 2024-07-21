@@ -41,3 +41,6 @@ Cm7...|(Faug)F..|Bbm7...|Eb9...| <br>
 
 kembali ke chorus <br>
 
+koda <br>
+C#maj7.Cm7.|Bmaj7.Eb9.|
+G#maj7...|
