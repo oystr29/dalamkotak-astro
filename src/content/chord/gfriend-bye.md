@@ -1,11 +1,11 @@
 ---
-title: Gfriend - Bye
-desc: one of the best
-pubDate: "Jul 17 2024"
+title: Bye
+artist: Gfriend
+album: Time For The Moon Night
+releaseDate:  Apr 30, 2018
 img: https://images.genius.com/837110ce59023b1b52d9102d1820efbd.300x300x1.png
+ytID: YUkUjbUIGiQ?si=lqJ2N5lV1bdLgFi4
 ---
-
-<iframe class="w-full h-64 md:w-96 md:h-80" src="https://www.youtube.com/embed/YUkUjbUIGiQ?si=lqJ2N5lV1bdLgFi4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 intro <br>
 F#.C#/F.|E.Ebsus4 Eb.|G#m G#mj7 G#m7 G#m6 |C#sus4.C#aug.| <br>

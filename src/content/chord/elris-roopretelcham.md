@@ -1,11 +1,11 @@
 ---
-title: Elris - Ropretelcham
-desc: jangan tanya kunci dasarnya apa
-pubDate: "Nov 09 2023"
+title: Roopretelcham
+artist: Elris
+album: Color Crush
+releaseDate: "Sep 13 2017"
 img: https://images.genius.com/351673009d9092750bb0b6dddfae49e2.300x300x1.png
+ytID: v4eYk41U_wg?si=-Hzd24k_iyxbKhs5
 ---
-
-<iframe class="w-full h-64 md:w-96 md:h-80"  src="https://www.youtube.com/embed/v4eYk41U_wg?si=-Hzd24k_iyxbKhs5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 intro <br>
 C#maj7...|....|Emaj7...|....| <br>

@@ -4,11 +4,12 @@ import { getCollection } from "astro:content";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/id";
+import { Icon } from "astro-icon/components";
 
 dayjs.extend(relativeTime);
 
 const chords = (await getCollection("chord")).sort(
-  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+  (a, b) => b.data.releaseDate.valueOf() - a.data.releaseDate.valueOf(),
 );
 ---
 
@@ -19,35 +20,68 @@ const chords = (await getCollection("chord")).sort(
   </head>
   <body
     transition:animate="slide"
-    class="bg-gray-900 text-white scrollbar-thin scrollbar-track-gray-900 scrollbar-thumb-white"
+    class="bg-gray-950 text-white p-2 flex flex-col flex-1 h-screen"
   >
-    <main class="container mx-auto mt-10 pb-5">
-      <div class="flex flex-col items-center justify-center w-full mb-8">
-        <h1 class="font-bold text-5xl">Chord</h1>
-        <h3 class="text-base text-gray-500">
-          just a bunch of guitar chords that internet doesn't provided
-        </h3>
-      </div>
-      <div
-        class="grid grid-cols-1 px-4 md:px-0 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center justify-center"
+    <main class="flex gap-4 flex-1">
+      <section class="flex flex-col gap-2 basis-1/5">
+        <ul
+          class="bg-gray-900 rounded-lg pl-6 gap-3 p-4 w-full flex flex-col text-lg flex-none"
+        >
+          <li
+            class="flex items-center gap-3 font-bold cursor-pointer hover:bg-gray-800 p-1.5 rounded-lg"
+          >
+            <Icon class="h-10 w-10" name="mdi:home-variant-outline" />
+            <p>Home</p>
+          </li>
+          <li
+            class="flex items-center gap-3 font-bold cursor-pointer hover:bg-gray-800 p-1.5 rounded-lg"
+          >
+            <Icon class="h-10 w-10" name="mdi:search" />
+            <p>Search</p>
+          </li>
+        </ul>
+        <div class="bg-gray-900 rounded-lg pl-6 p-4 w-full flex-1">makan</div>
+      </section>
+      <section
+        class="flex flex-col basis-4/5 flex-1 bg-gradient-to-b from-[0.1%] from-blue-950 via-gray-900 to-gray-900 p-4 rounded-lg pt-28"
       >
-        {
-          chords.map((post) => (
-            <div class="rounded-2xl">
-              <img class="rounded-2xl max-h-64 mb-2" src={post.data.img} />
-              <a
-                href={`/chord/${post.slug}`}
-                class="text-2xl font-semibold hover:underline"
-              >
-                {post.data.title}
-              </a>
-              <div class="capitalize text-sm text-gray-500">
-                {dayjs().to(dayjs(post.data.pubDate))}
-              </div>
-            </div>
-          ))
-        }
-      </div>
+        <h1 class="font-bold text-4xl">Chord</h1>
+        <div class="flex flex-wrap gap-4">
+          {
+            chords.map((chord) => (
+              <>
+                <a
+                  class="rounded-lg hover:bg-gray-700 h-max p-4"
+                  href={`/chord/${chord.slug}`}
+                >
+                  <img src={chord.data.img} class="rounded-lg shadow-lg mb-2" />
+                  <p class="font-semibold text-xl line-clamp-1 text-ellipsis">
+                    {chord.data.title}
+                  </p>
+                  <div class="flex items-center gap-1">
+                    <Icon name="mdi:artist-outline" />
+                    <p class="font-bold line-clamp-1 text-ellipsis">
+                      {chord.data.artist}
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <Icon name="mdi:album" />
+                    <p class="font-bold  line-clamp-1 text-ellipsis">
+                      {chord.data.album}
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    <Icon name="mdi:date-range" />
+                    <p class="font-bold line-clamp-1 text-ellipsis">
+                      {dayjs(chord.data.releaseDate).format("YYYY")}
+                    </p>
+                  </div>
+                </a>
+              </>
+            ))
+          }
+        </div>
+      </section>
     </main>
   </body>
 </html>

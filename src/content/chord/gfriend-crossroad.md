@@ -1,11 +1,11 @@
 ---
-title: Gfriend - Crossroad
-desc: one of the best
-pubDate: "Jul 17 2024"
+title: Crossroad
+releaseDate: "Feb 3, 2020"
+artist: Gfriend
+album: Labyrinth
 img: https://images.genius.com/f7bd836791ce2629bb52d2ed7d73427a.300x300x1.jpg
+ytID: jGR9irMsPNg?si=4hh-CkIR-2_5gkmY
 ---
-
-<iframe class="w-full h-64 md:w-96 md:h-80" src="https://www.youtube.com/embed/jGR9irMsPNg?si=4hh-CkIR-2_5gkmY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 intro <br>
 Ebm...|...| <br>

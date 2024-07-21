@@ -1,11 +1,11 @@
 ---
-title: Gfriend - Room of the Mirrors
-desc: one of the best
-pubDate: "Jul 17 2024"
+title: Room of Mirrors
+artist: Gfriend
+album: Song of the Sirens
+releaseDate: "Jul 13 2020"
 img: https://images.genius.com/71e7c99e7b06c31d55e8bf392b55cf1d.300x300x1.jpg
+ytID: 4DjlZyl04_c?si=u8GyNlLZXKdGIwCJ
 ---
-
-<iframe class="w-full h-64 md:w-96 md:h-80" src="https://www.youtube.com/embed/4DjlZyl04_c?si=u8GyNlLZXKdGIwCJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 intro <br>
 Fm.Bb.|Ebmaj7...|Dm7-5.G.|Cm...| <br>

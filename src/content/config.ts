@@ -12,13 +12,15 @@ const blog = defineCollection({
   }),
 });
 
-const chords = defineCollection({
+const chord = defineCollection({
   schema: z.object({
     title: z.string(),
-    desc: z.string(),
-    pubDate: z.coerce.date(),
+    releaseDate: z.coerce.date(),
+    artist: z.string().optional(),
+    album: z.string().optional(),
     img: z.string().optional(),
+    ytID: z.string(),
   }),
 });
 
-export const collections = { blog, chords };
+export const collections = { blog, chord };

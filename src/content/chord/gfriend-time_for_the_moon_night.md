@@ -1,11 +1,13 @@
 ---
-title: Gfriend - Time for the Moon Night
-desc: one of the best
-pubDate: "Jul 17 2024"
+title: Time for the Moon Night
+artist: Gfriend
+album: Time For The Moon Night
+releaseDate:  Apr 30, 2018
 img: https://images.genius.com/837110ce59023b1b52d9102d1820efbd.300x300x1.png
+ytID: _XyBa8QsVQU?si=767ae8yiljs00McC
 ---
 
-<iframe class="w-full h-64 md:w-96 md:h-80" src="https://www.youtube.com/embed/_XyBa8QsVQU?si=767ae8yiljs00McC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe class="w-full h-64 md:w-96 md:h-80" src="https://www.youtube.com/embed/" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 intro <br>
 Ebm...|C#...|B...|F#/Bb...| <br>
