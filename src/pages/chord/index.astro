@@ -1,10 +1,11 @@
 ---
-import BaseHead from "../../components/BaseHead.astro";
 import { getCollection } from "astro:content";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/id";
 import { Icon } from "astro-icon/components";
+import ChordSidebar from "~/components/ChordSidebar.astro";
+import BaseHead from "~/components/BaseHead.astro";
 
 dayjs.extend(relativeTime);
 
@@ -16,32 +17,15 @@ const chords = (await getCollection("chord")).sort(
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={"Kunci Gitar"} description={"Kunci Gitar"} />
+    <BaseHead
+      title={"Kunci Gitar"}
+      description={"Kunci Gitar"}
+      transition={false}
+    />
   </head>
-  <body
-    transition:animate="slide"
-    class="bg-gray-950 text-white p-2 flex flex-col flex-1 h-screen"
-  >
+  <body class="bg-gray-950 text-white p-2 flex flex-col flex-1 h-screen">
     <main class="flex gap-4 flex-1">
-      <section class="flex flex-col gap-2 basis-1/5">
-        <ul
-          class="bg-gray-900 rounded-lg pl-6 gap-3 p-4 w-full flex flex-col text-lg flex-none"
-        >
-          <li
-            class="flex items-center gap-3 font-bold cursor-pointer hover:bg-gray-800 p-1.5 rounded-lg"
-          >
-            <Icon class="h-10 w-10" name="mdi:home-variant-outline" />
-            <p>Home</p>
-          </li>
-          <li
-            class="flex items-center gap-3 font-bold cursor-pointer hover:bg-gray-800 p-1.5 rounded-lg"
-          >
-            <Icon class="h-10 w-10" name="mdi:search" />
-            <p>Search</p>
-          </li>
-        </ul>
-        <div class="bg-gray-900 rounded-lg pl-6 p-4 w-full flex-1">makan</div>
-      </section>
+      <ChordSidebar />
       <section
         class="flex flex-col basis-4/5 flex-1 bg-gradient-to-b from-[0.1%] from-blue-950 via-gray-900 to-gray-900 p-4 rounded-lg pt-28"
       >

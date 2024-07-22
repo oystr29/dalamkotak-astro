@@ -8,6 +8,7 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
+    "disable:toolbar": "astro preferences disable devToolbar",
     "astro": "astro"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
     "astro": "^4.5.12",
     "astro-icon": "^1.1.0",
     "dayjs": "^1.11.10",
+    "googleapis": "^140.0.1",
     "reveal.js": "^5.0.5",
     "reveal.js-mermaid-plugin": "^2.3.0",
     "svelte": "^4.2.12",

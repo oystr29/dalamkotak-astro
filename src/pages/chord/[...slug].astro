@@ -3,6 +3,10 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import BaseHead from "~/components/BaseHead.astro";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { Icon } from "astro-icon/components";
+import ChordLayout from "../../layouts/ChordLayout.astro";
+import ChordSidebar from "~/components/ChordSidebar.astro";
+import * as chord_md from "../../content/chord/gfriend-time_for_the_moon_night.md";
 import "dayjs/locale/id";
 
 dayjs.extend(relativeTime);
@@ -17,28 +21,241 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"chord">;
 
 const chord = Astro.props;
+
 const { Content } = await chord.render();
+const data: Record<string, { bar: string; time: string }[]> = {};
+let rec_data = "";
+chord_md
+  .rawContent()
+  .split("\n")
+  .filter((v) => v !== "")
+  .forEach((v) => {
+    if (/\[(.*?)\]/.test(v)) {
+      data[v] = [];
+      rec_data = v;
+      console.log(v);
+      return;
+    }
+    const [bar, time] = v.split(",");
+    data[rec_data].push({ bar, time });
+  });
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={chord.data.title} description={"Kumpulan Text aja"} />
+    <BaseHead
+      title={"Kunci Gitar"}
+      description={"Kunci Gitar"}
+      transition={false}
+    />
   </head>
-  <body
-    transition:animate="fade"
-    class="bg-gray-900 text-white scrollbar-thin scrollbar-track-gray-900 scrollbar-thumb-white"
-  >
-    <main class="container mx-auto mt-10 pb-5 px-2">
-      <div class="flex flex-col items-center justify-center w-full mb-10">
-        <h1 class="font-bold text-5xl">{chord.data.title}</h1>
-        <h2 class="capitalize text-xl text-gray-300 mb-4">
-          {dayjs().to(dayjs(chord.data.pubDate))}
-        </h2>
-        <img src={chord.data.img} class="rounded-xl" />
+  <body class="bg-gray-950 text-white p-2 flex flex-col flex-1 h-screen">
+    <main class="flex gap-4 flex-1">
+      <ChordSidebar />
+      <section
+        class="flex text-center flex-col basis-4/5 flex-1 text-white bg-red-950 p-4 rounded-lg pt-28"
+      >
+        <div></div>
+      </section>
+      <div
+        class="fixed bottom-0 left-0 z-50 flex w-full flex-1 items-center gap-3 rounded-lg rounded-b-none border bg-slate-950 p-2"
+      >
+        <div class="flex items-center justify-between flex-1">
+          <div class="flex items-center gap-6 text-lg">
+            <iframe
+              id="player"
+              width="100"
+              height="100"
+              src={`https://www.youtube.com/embed/${chord.data.ytID}?enablejsapi=1&autoplay=1`}
+              frameborder="0"
+              style="border: solid 4px #37474F"></iframe>
+            <div>
+              <p class="font-bold">{chord.data.title}</p>
+              <p>{chord.data.artist}</p>
+            </div>
+          </div>
+          <div class="flex flex-col items-center gap-4">
+            <div class="flex items-center gap-4">
+              <Icon
+                id="rewind10"
+                name="mdi:rewind-10"
+                class="w-8 h-8 hover:scale-110 transition"
+              />
+
+              <button id="mediabtn" type="button">
+                <Icon
+                  id="play"
+                  name="mdi:play"
+                  class="w-8 h-8 hover:scale-110 transition"
+                />
+                <Icon
+                  id="pause"
+                  name="mdi:pause"
+                  class="w-8 h-8 hover:scale-110 transition hidden"
+                />
+              </button>
+              <Icon
+                id="fw10"
+                name="mdi:fast-forward-10"
+                class="w-8 h-8 hover:scale-110 transition"
+              />
+            </div>
+            <div class="flex items-center gap-4">
+              <p id="curr-time"></p>
+              <div
+                class="w-[300px] bg-gray-200 rounded-full h-1.5 dark:bg-gray-700"
+              >
+                <div
+                  class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"
+                  style="width: 0%"
+                  id="progress-bar"
+                >
+                </div>
+              </div>
+              <p id="total-time"></p>
+            </div>
+          </div>
+          <div id="status">makan</div>
+          <div class="hidden"></div>
+        </div>
       </div>
-      <article class="prose lg:prose-2xl max-w-none tracking-widest">
-        <Content />
-      </article>
+      <script type="text/javascript" is:inline>
+        var tag = document.createElement("script");
+        tag.id = "iframe-demo";
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName("script")[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        const playBtn = document.querySelector("#play");
+        const pauseBtn = document.querySelector("#pause");
+        let btnMedia = {
+          pause: () => {
+            if (playBtn.classList.contains("hidden"))
+              playBtn.classList.remove("hidden");
+            if (!pauseBtn.classList.contains("hidden"))
+              pauseBtn.classList.add("hidden");
+          },
+          play: () => {
+            if (!playBtn.classList.contains("hidden"))
+              playBtn.classList.add("hidden");
+            if (pauseBtn.classList.contains("hidden"))
+              pauseBtn.classList.remove("hidden");
+          },
+        };
+
+        var player;
+        let i = 0;
+        setInterval(function () {
+          // if (player && i > player.getDuration()) {
+          //   clearInterval(this);
+          //   return;
+          // }
+          i++;
+          if (player) {
+            const currTime = parseInt(player.getCurrentTime());
+            const minutes = Math.floor(currTime / 60);
+            const second = currTime - minutes * 60;
+            document.querySelector("#curr-time").innerHTML =
+              `${minutes}:${second.toString().length === 1 ? `0${second}` : second}`;
+            document.querySelector("#progress-bar").style.width =
+              `${(parseInt(player.getCurrentTime()) / player.getDuration()) * 100}%`;
+          }
+        }, 1000);
+
+        function onYouTubeIframeAPIReady() {
+          player = new YT.Player("player", {
+            playerVars: {
+              autoplay: 1,
+              loop: 1,
+              mute: 1, // N.B. here the mute settings.
+              playsinline: 1,
+            },
+            events: {
+              onApiChange: (event) => {
+                console.log(event);
+              },
+              onReady: (event) => {
+                const duration = event.target.getDuration();
+                const minutes = Math.floor(duration / 60);
+                const second = duration - minutes * 60;
+
+                document.getElementById("player").style.borderColor = "#FF6D00";
+                console.log(event.target.getPlayerState());
+                document.querySelector("#status").innerHTML = "cued";
+                document.querySelector("#curr-time").innerHTML = `0:00`;
+                document.querySelector("#total-time").innerHTML =
+                  `${minutes}:${second}`;
+              },
+              onStateChange: (event) => {
+                const playerStatus = event.data;
+                let color;
+                let status;
+                if (playerStatus == -1) {
+                  color = "#37474F"; // unstarted = gray
+                  status = "unstarted";
+                  btnMedia.pause();
+                } else if (playerStatus == 0) {
+                  color = "#FFFF00"; // ended = yellow
+                  status = "ended";
+                } else if (playerStatus == 1) {
+                  color = "#33691E"; // playing = green
+                  btnMedia.play();
+                  status = "playing";
+                } else if (playerStatus == 2) {
+                  color = "#DD2C00"; // paused = red
+                  btnMedia.pause();
+                  status = "paused";
+                } else if (playerStatus == 3) {
+                  color = "#AA00FF"; // buffering = purple
+                  status = "buffering";
+                } else if (playerStatus == 5) {
+                  color = "#FF6DOO"; // video cued = orange
+                  status = "cued";
+                }
+                if (color) {
+                  document.getElementById("player").style.borderColor = color;
+                }
+                if (status) {
+                  document.querySelector("#status").innerHTML = status;
+                }
+              },
+            },
+          });
+        }
+
+        document.querySelector("#mediabtn").addEventListener("click", () => {
+          const state = player.getPlayerState();
+          if (state == 1) {
+            btnMedia.pause();
+            player.pauseVideo();
+          } else if (state == 2 || state == 5 || state == -1) {
+            btnMedia.play();
+            player.playVideo();
+          }
+        });
+
+        document.querySelector("#rewind10").addEventListener("click", () => {
+          const time = player.getCurrentTime();
+          const seek = Number(time) - 10;
+          if (seek < 0) {
+            player.seekTo(0);
+            return;
+          }
+          player.seekTo(seek);
+        });
+        document.querySelector("#fw10").addEventListener("click", () => {
+          const time = player.getCurrentTime();
+          const seek = Number(time) + 10;
+          player.seekTo();
+          if (seek > Number(player.getDuration())) {
+            player.seekTo(player.getDuration());
+            return;
+          }
+
+          player.seekTo(seek);
+        });
+      </script>
     </main>
   </body>
 </html>
