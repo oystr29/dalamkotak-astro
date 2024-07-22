@@ -39,6 +39,7 @@ chord_md
     const [bar, time] = v.split(",");
     data[rec_data].push({ bar, time });
   });
+console.log(data);
 ---
 
 <!doctype html>
@@ -50,13 +51,60 @@ chord_md
       transition={false}
     />
   </head>
-  <body class="bg-gray-950 text-white p-2 flex flex-col flex-1 h-screen">
+  <body
+    class="bg-gray-950 text-white p-2 flex flex-col flex-1 overflow-y-hidden"
+  >
     <main class="flex gap-4 flex-1">
       <ChordSidebar />
       <section
-        class="flex text-center flex-col basis-4/5 flex-1 text-white bg-red-950 p-4 rounded-lg pt-28"
+        class="flex items-center flex-col basis-4/5 flex-1 text-white bg-red-950 p-4 rounded-lg"
       >
-        <div></div>
+        <div class="h-1/2 overflow-y-auto pr-6 text-4xl font-bold">
+          {
+            Object.keys(data).map((key, i) => {
+              const next =
+                i + 1 === Object.keys(data).length
+                  ? undefined
+                  : data[Object.keys(data)[i + 1]];
+              return (
+                <>
+                  <div class="text-white/10">{key}</div>
+                  <div class="mb-4">
+                    {(data[key] as { bar: string; time: string }[]).map(
+                      (v, ii) => {
+                        const to =
+                          ii + 1 !== data[key].length
+                            ? data[key][ii + 1].time
+                            : next?.[0].time ?? "";
+                        const [minFrom, secFrom] = v.time
+                          .split(":")
+                          .map((a) => Number(a));
+
+                        const [minTo, secTo] = to
+                          .split(":")
+                          .map((a) => Number(a));
+                        return (
+                          <div
+                            data-from={minFrom * 60 + secFrom}
+                            data-to={
+                              isNaN(minTo * 60 + secTo)
+                                ? ""
+                                : minTo * 60 + secTo
+                            }
+                            class="text-white/10 mb-1 bar"
+                            style="color: rgb(255 255 255 / 0.1);"
+                          >
+                            {v.bar}
+                          </div>
+                        );
+                      },
+                    )}
+                  </div>
+                </>
+              );
+            })
+          }
+        </div>
       </section>
       <div
         class="fixed bottom-0 left-0 z-50 flex w-full flex-1 items-center gap-3 rounded-lg rounded-b-none border bg-slate-950 p-2"
@@ -92,6 +140,11 @@ chord_md
                 <Icon
                   id="pause"
                   name="mdi:pause"
+                  class="w-8 h-8 hover:scale-110 transition hidden"
+                />
+                <Icon
+                  id="buffer"
+                  name="mdi:progress-helper"
                   class="w-8 h-8 hover:scale-110 transition hidden"
                 />
               </button>
@@ -144,6 +197,13 @@ chord_md
           },
         };
 
+        const barEls = document.querySelectorAll(".bar");
+        const timeFrom = Array.from(barEls).map((el) =>
+          el.getAttribute("data-from"),
+        );
+        let prev_time = -1;
+        let currIndex = -1;
+
         var player;
         let i = 0;
         setInterval(function () {
@@ -156,10 +216,25 @@ chord_md
             const currTime = parseInt(player.getCurrentTime());
             const minutes = Math.floor(currTime / 60);
             const second = currTime - minutes * 60;
-            document.querySelector("#curr-time").innerHTML =
-              `${minutes}:${second.toString().length === 1 ? `0${second}` : second}`;
+            const curr_time_dom = `${minutes}:${second.toString().length === 1 ? `0${second}` : second}`;
+            document.querySelector("#curr-time").innerHTML = curr_time_dom;
             document.querySelector("#progress-bar").style.width =
               `${(parseInt(player.getCurrentTime()) / player.getDuration()) * 100}%`;
+
+            if (
+              player.getPlayerState() == 1 &&
+              document.querySelector(`[data-from='${currTime}']`)
+            ) {
+              console.log(prev_time);
+              if (prev_time != -1) {
+                document.querySelector(
+                  `[data-from='${prev_time}']`,
+                ).style.color = "rgb(255 255 255 / 0.1)";
+              }
+              prev_time = currTime;
+              document.querySelector(`[data-from='${currTime}']`).style.color =
+                "rgb(255 255 255)";
+            }
           }
         }, 1000);
 
