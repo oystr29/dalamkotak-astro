@@ -22,7 +22,6 @@ type Props = CollectionEntry<"chord">;
 
 const chord = Astro.props;
 
-const { Content } = await chord.render();
 const data: Record<string, { bar: string; time: string }[]> = {};
 let rec_data = "";
 chord_md
@@ -59,7 +58,9 @@ console.log(data);
       <section
         class="flex items-center flex-col basis-4/5 flex-1 text-white bg-red-950 p-4 rounded-lg"
       >
-        <div class="h-1/2 overflow-y-auto pr-6 text-4xl font-bold">
+        <div
+          class="h-1/2 overflow-y-auto pr-6 text-4xl font-bold scrollbar-thin scrollbar-track-red-950 scrollbar-thumb-red-950 pb-48"
+        >
           {
             Object.keys(data).map((key, i) => {
               const next =
@@ -68,7 +69,7 @@ console.log(data);
                   : data[Object.keys(data)[i + 1]];
               return (
                 <>
-                  <div class="text-white/10">{key}</div>
+                  <div class="text-white/10">{key.replaceAll(".", "")}</div>
                   <div class="mb-4">
                     {(data[key] as { bar: string; time: string }[]).map(
                       (v, ii) => {
@@ -198,20 +199,15 @@ console.log(data);
         };
 
         const barEls = document.querySelectorAll(".bar");
-        const timeFrom = Array.from(barEls).map((el) =>
-          el.getAttribute("data-from"),
+        const timeFrom = Array.from(barEls).map(
+          (el) => el.getAttribute("data-from") ?? "",
         );
         let prev_time = -1;
         let currIndex = -1;
 
         var player;
-        let i = 0;
-        setInterval(function () {
-          // if (player && i > player.getDuration()) {
-          //   clearInterval(this);
-          //   return;
-          // }
-          i++;
+        let index = 0;
+        const intervalFunc = () => {
           if (player) {
             const currTime = parseInt(player.getCurrentTime());
             const minutes = Math.floor(currTime / 60);
@@ -221,22 +217,38 @@ console.log(data);
             document.querySelector("#progress-bar").style.width =
               `${(parseInt(player.getCurrentTime()) / player.getDuration()) * 100}%`;
 
+            timeFrom.some((v, i) => {
+              const time = Number(v);
+              if (i === timeFrom?.length - 1 && currTime > time) {
+                index = i;
+                return true;
+              }
+
+              if (time <= currTime && Number(timeFrom[i + 1]) >= currTime) {
+                index = i;
+                return true;
+              }
+
+              index = i;
+            });
+
             if (
               player.getPlayerState() == 1 &&
-              document.querySelector(`[data-from='${currTime}']`)
+              document.querySelector(`[data-from='${timeFrom[index]}']`)
             ) {
-              console.log(prev_time);
               if (prev_time != -1) {
                 document.querySelector(
                   `[data-from='${prev_time}']`,
                 ).style.color = "rgb(255 255 255 / 0.1)";
               }
-              prev_time = currTime;
-              document.querySelector(`[data-from='${currTime}']`).style.color =
-                "rgb(255 255 255)";
+              prev_time = timeFrom[index];
+              document.querySelector(
+                `[data-from='${timeFrom[index]}']`,
+              ).style.color = "rgb(255 255 255)";
             }
           }
-        }, 1000);
+        };
+        let interval;
 
         function onYouTubeIframeAPIReady() {
           player = new YT.Player("player", {
@@ -247,16 +259,13 @@ console.log(data);
               playsinline: 1,
             },
             events: {
-              onApiChange: (event) => {
-                console.log(event);
-              },
+              onApiChange: (event) => {},
               onReady: (event) => {
                 const duration = event.target.getDuration();
                 const minutes = Math.floor(duration / 60);
                 const second = duration - minutes * 60;
 
                 document.getElementById("player").style.borderColor = "#FF6D00";
-                console.log(event.target.getPlayerState());
                 document.querySelector("#status").innerHTML = "cued";
                 document.querySelector("#curr-time").innerHTML = `0:00`;
                 document.querySelector("#total-time").innerHTML =
@@ -272,13 +281,16 @@ console.log(data);
                   btnMedia.pause();
                 } else if (playerStatus == 0) {
                   color = "#FFFF00"; // ended = yellow
+                  if (interval) clearInterval(interval);
                   status = "ended";
                 } else if (playerStatus == 1) {
                   color = "#33691E"; // playing = green
+                  interval = setInterval(intervalFunc, 1000);
                   btnMedia.play();
                   status = "playing";
                 } else if (playerStatus == 2) {
                   color = "#DD2C00"; // paused = red
+                  if (interval) clearInterval(interval);
                   btnMedia.pause();
                   status = "paused";
                 } else if (playerStatus == 3) {
