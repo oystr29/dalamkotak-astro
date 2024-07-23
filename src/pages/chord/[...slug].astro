@@ -45,13 +45,13 @@ console.log(data);
 <html lang="en">
   <head>
     <BaseHead
-      title={"Kunci Gitar"}
+      title={`${chord.data.title} - ${chord.data.artist}`}
       description={"Kunci Gitar"}
       transition={false}
     />
   </head>
   <body
-    class="bg-gray-950 text-white p-2 flex flex-col flex-1 overflow-y-hidden"
+    class="bg-gray-950 text-white p-2 flex flex-col flex-1 h-screen overflow-y-hidden"
   >
     <main class="flex gap-4 flex-1">
       <ChordSidebar />
@@ -59,7 +59,8 @@ console.log(data);
         class="flex items-center flex-col basis-4/5 flex-1 text-white bg-red-950 p-4 rounded-lg"
       >
         <div
-          class="h-1/2 overflow-y-auto pr-6 text-4xl font-bold scrollbar-thin scrollbar-track-red-950 scrollbar-thumb-red-950 pb-48"
+          id="chord-container"
+          class="h-screen overflow-y-auto pr-6 text-4xl font-bold scrollbar-thin scrollbar-track-red-950 scrollbar-thumb-red-950 pb-64 scroll-smooth"
         >
           {
             Object.keys(data).map((key, i) => {
@@ -92,7 +93,7 @@ console.log(data);
                                 ? ""
                                 : minTo * 60 + secTo
                             }
-                            class="text-white/10 mb-1 bar"
+                            class="text-white/10 mb-1 bar scroll-mt-8"
                             style="color: rgb(255 255 255 / 0.1);"
                           >
                             {v.bar}
@@ -175,6 +176,37 @@ console.log(data);
         </div>
       </div>
       <script type="text/javascript" is:inline>
+        const chordContainer = document.querySelector("#chord-container");
+
+        const topPos = chordContainer.offsetTop;
+
+        function scrollTo(element, to, duration) {
+          var start = element.scrollTop,
+            change = to - start,
+            currentTime = 0,
+            increment = 20;
+
+          var animateScroll = function () {
+            currentTime += increment;
+            var val = Math.easeInOutQuad(currentTime, start, change, duration);
+            element.scrollTop = val;
+            if (currentTime < duration) {
+              setTimeout(animateScroll, increment);
+            }
+          };
+          animateScroll();
+        }
+
+        //t = current time
+        //b = start value
+        //c = change in value
+        //d = duration
+        Math.easeInOutQuad = function (t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) return (c / 2) * t * t + b;
+          t--;
+          return (-c / 2) * (t * (t - 2) - 1) + b;
+        };
         var tag = document.createElement("script");
         tag.id = "iframe-demo";
         tag.src = "https://www.youtube.com/iframe_api";
@@ -200,7 +232,7 @@ console.log(data);
 
         const barEls = document.querySelectorAll(".bar");
         const timeFrom = Array.from(barEls).map(
-          (el) => el.getAttribute("data-from") ?? "",
+          (el) => Number(el.getAttribute("data-from")) ?? 0,
         );
         let prev_time = -1;
         let currIndex = -1;
@@ -217,6 +249,21 @@ console.log(data);
             document.querySelector("#progress-bar").style.width =
               `${(parseInt(player.getCurrentTime()) / player.getDuration()) * 100}%`;
 
+            for (let i = index; i < timeFrom.length; i++) {
+              const time = timeFrom[i];
+              if (i === timeFrom.length - 1 && currTime > time) {
+                index = i;
+                break;
+              }
+
+              if (time <= currTime && timeFrom[i + 1] >= currTime) {
+                index = i;
+                break;
+              }
+
+              index = i;
+            }
+
             timeFrom.some((v, i) => {
               const time = Number(v);
               if (i === timeFrom?.length - 1 && currTime > time) {
@@ -232,19 +279,19 @@ console.log(data);
               index = i;
             });
 
-            if (
-              player.getPlayerState() == 1 &&
-              document.querySelector(`[data-from='${timeFrom[index]}']`)
-            ) {
+            const hightlightEl = document.querySelector(
+              `[data-from='${timeFrom[index]}']`,
+            );
+            if (player.getPlayerState() == 1 && hightlightEl) {
               if (prev_time != -1) {
                 document.querySelector(
                   `[data-from='${prev_time}']`,
                 ).style.color = "rgb(255 255 255 / 0.1)";
               }
               prev_time = timeFrom[index];
-              document.querySelector(
-                `[data-from='${timeFrom[index]}']`,
-              ).style.color = "rgb(255 255 255)";
+              hightlightEl.style.color = "rgb(255 255 255)";
+
+              scrollTo(chordContainer, hightlightEl.offsetTop - 60, 100);
             }
           }
         };
