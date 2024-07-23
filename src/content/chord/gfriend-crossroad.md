@@ -9,44 +9,44 @@ ytID: dgxEyvYPdJ8
 
 [intro-acapella]
 Ebm...|...|,0:01
-Ebm...|C#sus4...|Cm7-5...|Bmaj7...|,0:04
+Ebm...|C#sus4...|Cm7-5...|Bmaj7...|,0:03
 
 [intro]
-Ebm...|C#sus4...|Cm7-5...|Bmaj7.Bb7.|,0:08
+Ebm...|C#sus4...|Cm7-5...|Bmaj7.Bb7.|,0:09
 Ebm...|C#sus4...|Cm7-5...|Bmaj7.Bb7.|,0:14
 
 [verse 1]
 Cm7...|....|Gm7...|....|,0:20
-G#maj7...|....|G#m...|C#9...|,0:25
+G#maj7...|....|G#m...|C#9...|,0:26
 Cm7...|....|Gm7...|....|,0:31
 F#maj7...|....|Gbsus4...|Bb7...|,0:37
 
 [pre-chorus] 
-Ebmaj7...|F/Eb...|Dm7...|Gm7...|,0:42
+Ebmaj7...|F/Eb...|Dm7...|Gm7...|,0:43
 Cm7...|Dm7...|Ebmaj7...|D...|,0:48
 
 [chorus-a]
 F#...|G#/F#...|Fm...|Bbm...|,0:54
 F#...|G#/F#...|Bbm...|G#sus4...|,0:59
 Gm7-5...|F#maj7...|Fm...|Bbm...|,1:05
-F#...|G#...|Bbsus4...|Bb7...|,1:10
+F#...|G#...|Bbsus4...|Bb7...|,1:11
 
 [chorus-b]
-Ebm...|C#sus4...|Cm7-5...|Bmaj7.Bb7.|,1:16
+Ebm...|C#sus4...|Cm7-5...|Bmaj7.Bb7.|,1:17
 Ebm...|C#sus4...|Cm7-5...|Bmaj7.Bb7.|,1:22
 
 [verse-2]
 Cm7...|....|Gm7...|....|,1:28
-G#maj7...|....|G#m...|C#9...|,1:33
+G#maj7...|....|G#m...|C#9...|,1:34
 
 [pre-chorus.] 
 Ebmaj7...|F/Eb...|Dm7...|Gm7...|,1:39
-Cm7...|Dm7...|Ebmaj7...|D...|,1:44
+Cm7...|Dm7...|Ebmaj7...|D...|,1:45
 
 [chorus-a.]
-F#...|G#/F#...|Fm...|Bbm...|,1:50
-F#...|G#/F#...|Bbm...|G#sus4...|,1:56
-Gm7-5...|F#maj7...|Fm...|Bbm...|,2:01
+F#...|G#/F#...|Fm...|Bbm...|,1:51
+F#...|G#/F#...|Bbm...|G#sus4...|,1:57
+Gm7-5...|F#maj7...|Fm...|Bbm...|,2:02
 F#...|G#...|Bbsus4...|Bb7...|,2:07
 
 [bridge]
@@ -57,13 +57,13 @@ Cm.CmMaj7.|Cm7.F/A.|Bbsus4...|Dsus4.D.|,2:30
 
 [chorus-a..]
 F#...|G#/F#...|Fm...|Bbm...|,2:35
-F#...|G#/F#...|Bbm...|G#sus4...|,2:41
-Gm7-5...|F#maj7...|Fm...|Bbm...|,2:46
-F#...|G#...|Bbsus4...|Bb7...|,2:52
+F#...|G#/F#...|Bbm...|G#sus4...|,2:42
+Gm7-5...|F#maj7...|Fm...|Bbm...|,2:47
+F#...|G#...|Bbsus4...|Bb7...|,2:53
 
 [chorus-b..]
 Ebm...|C#sus4...|Cm7-5...|Bmaj7.Bb7.|,2:58
-Ebm...|C#sus4...|Cm7-5...|Bmaj7.Bb7.|,3:03
+Ebm...|C#sus4...|Cm7-5...|Bmaj7.Bb7.|,3:04
 
 [coda]
 Bmaj7.Bbm7.|Abm7.F#.|Fm...|G...|,3:09

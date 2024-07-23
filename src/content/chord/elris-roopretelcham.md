@@ -8,11 +8,11 @@ ytID: ZHFQqsCtc3A
 ---
 
 [intro]
-C#maj7...|....|Emaj7...|....|,0:20
+C#maj7...|....|Emaj7...|....|,0:21
 Bmaj7...|....|C#m7.Ebm7.|Em7.Eb9.|,0:26
 
 [verse 1]
-G#maj7...|....|C#m7...|F#9...|,0:32
+G#maj7...|....|C#m7...|F#9...|,0:33
 G#maj7...|....|C#m7...|F#9...|,0:39
 
 [pre-chorus] 
@@ -41,7 +41,7 @@ Bbm7...|....|C#m7...|Eb9...|,1:56
 G#maj7...|Fm7...|C#maj7...|C#m7/E...|,2:02
 Cm7...|(Faug)F..|Bbm7...|Eb9...|,2:08
 C9...|Fmaj7...|Em7-5.A7.|Dmaj7...|,2:15
-Gm7.C9.|Fmaj7.Bbmaj7.|C#maj7...|Bbm7.Eb9.|,2:22
+Gm7.C9.|Fmaj7.Bbmaj7.|C#maj7...|Bbm7.Eb9.|,2:21
 
 [bridge]
 Ebm7...|G#...|C#maj7...|F#9...|,2:28
@@ -59,7 +59,7 @@ Gm7.C9.|Fmaj7.Bbmaj7.|C#maj7...|Bbm7.Eb9.|,3:12
 
 [chorus-b..]
 C#maj7...|....|C#m7/E...|....|,3:19
-Cm7...|Bmaj7...|Bbm7...|C#m7.Eb9.|,3:26
+Cm7...|Bmaj7...|Bbm7...|C#m7.Eb9.|,3:25
 
 [koda]
 C#maj7.Cm7.|Bmaj7.Eb9.|,3:32

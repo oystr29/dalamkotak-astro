@@ -113,8 +113,20 @@ chord_md
         </div>
       </section>
       <div
-        class="fixed bottom-0 left-0 z-50 flex w-full flex-1 items-center gap-3 rounded-lg rounded-b-none bg-red-950 md:bg-slate-950 p-2 px-6"
+        class="fixed bottom-0 left-0 z-50 w-full flex-1 items-center gap-3 rounded-lg rounded-b-none bg-red-950 md:bg-slate-950 p-2 px-6"
       >
+        <div>
+          <input
+            type="range"
+            value="0"
+            class="media-range block md:hidden w-full text-gray-700 bg-gray-400 accent-red-500 border border-gray-800 rounded-md focus:border-blue-950 focus:outline-none focus:ring"
+          />
+          <div class="flex justify-between items-center">
+            <p id="" class="curr-time md:hidden block"></p>
+            <p id="" class="total-time md:hidden block"></p>
+          </div>
+        </div>
+
         <div class="flex items-center justify-between flex-1">
           <div class="flex items-center gap-6 text-lg">
             <iframe
@@ -161,25 +173,13 @@ chord_md
               />
             </div>
             <div class="hidden md:flex items-center gap-4">
-              <p id="curr-time"></p>
-
+              <p class="curr-time hidden md:block"></p>
               <input
-                id="media-range"
                 type="range"
                 value="0"
-                class="block w-[300px] text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring"
+                class="media-range md:block hidden w-[300px] text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring"
               />
-              <!-- <div
-                class="w-[300px] bg-gray-200 rounded-full h-1.5 dark:bg-gray-700"
-              >
-                <div
-                  class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500"
-                  style="width: 0%"
-                  id="progress-bar"
-                >
-                </div>
-              </div> -->
-              <p id="total-time"></p>
+              <p class="total-time hidden md:block"></p>
             </div>
           </div>
           <Icon name="mdi:heart-outline" class="h-8 w-8" />
@@ -188,7 +188,11 @@ chord_md
       </div>
       <script type="text/javascript" is:inline>
         const chordContainer = document.querySelector("#chord-container");
-        const mediaRange = document.querySelector("#media-range");
+        const mediaRanges = Array.from(
+          document.querySelectorAll(".media-range"),
+        );
+        const currTimes = Array.from(document.querySelectorAll(".curr-time"));
+        const totalTimes = Array.from(document.querySelectorAll(".total-time"));
 
         function scrollTo(element, to, duration) {
           var start = element.scrollTop,
@@ -278,8 +282,13 @@ chord_md
             const minutes = Math.floor(currTime / 60);
             const second = currTime - minutes * 60;
             const curr_time_dom = `${minutes}:${second.toString().length === 1 ? `0${second}` : second}`;
-            document.querySelector("#curr-time").innerHTML = curr_time_dom;
-            mediaRange.value = `${(parseInt(player.getCurrentTime()) / player.getDuration()) * 100}`;
+            currTimes.forEach(
+              (currTime) => (currTime.innerHTML = curr_time_dom),
+            );
+            mediaRanges.forEach(
+              (mediaRange) =>
+                (mediaRange.value = `${(parseInt(player.getCurrentTime()) / player.getDuration()) * 100}`),
+            );
 
             getCurrentHightlightIndex(index);
 
@@ -317,9 +326,11 @@ chord_md
                 const second = duration - minutes * 60;
 
                 document.getElementById("player").style.borderColor = "#FF6D00";
-                document.querySelector("#curr-time").innerHTML = `0:00`;
-                document.querySelector("#total-time").innerHTML =
-                  `${minutes}:${second}`;
+                currTimes.forEach((currTime) => (currTime.innerHTML = "0:00"));
+                totalTimes.forEach(
+                  (totalTimes) =>
+                    (totalTimes.innerHTML = `${minutes}:${second}`),
+                );
               },
               onStateChange: (event) => {
                 const playerStatus = event.data;
@@ -332,6 +343,9 @@ chord_md
                 } else if (playerStatus == 0) {
                   color = "#FFFF00"; // ended = yellow
                   if (interval) clearInterval(interval);
+                  mediaRanges.forEach((v) => (v.value = 0));
+                  btnMedia.pause();
+                  currTimes.forEach((v) => (v.innerHTML = `0:00`));
                   status = "ended";
                 } else if (playerStatus == 1) {
                   color = "#33691E"; // playing = green
@@ -359,18 +373,22 @@ chord_md
         }
 
         // outside track run correctly
-        document.querySelector("#mediabtn").addEventListener("click", () => {
+        function mediaBtnClick() {
           const state = player.getPlayerState();
           if (state == 1) {
             btnMedia.pause();
             player.pauseVideo();
-          } else if (state == 2 || state == 5 || state == -1) {
+          } else if (state == 0 || state == 2 || state == 5 || state == -1) {
             btnMedia.play();
             player.playVideo();
           }
-        });
+        }
 
-        document.querySelector("#rewind10").addEventListener("click", () => {
+        document
+          .querySelector("#mediabtn")
+          .addEventListener("click", mediaBtnClick);
+
+        function rewind10() {
           const time = player.getCurrentTime();
           const seek = Number(time) - 10;
           if (seek < 0) {
@@ -379,8 +397,13 @@ chord_md
           }
           player.seekTo(seek);
           getCurrentHightlightIndex(0);
-        });
-        document.querySelector("#fw10").addEventListener("click", () => {
+        }
+
+        document
+          .querySelector("#rewind10")
+          .addEventListener("click", () => rewind10);
+
+        function fw10() {
           const time = player.getCurrentTime();
           const seek = Number(time) + 10;
           player.seekTo();
@@ -391,15 +414,36 @@ chord_md
 
           player.seekTo(seek);
           getCurrentHightlightIndex(0);
-        });
+        }
+        document.querySelector("#fw10").addEventListener("click", fw10);
         // persent = current/duration * 100
         // persent *100/duration = current
-        mediaRange.addEventListener("change", (event) => {
-          const percent = Number(event.target.value);
-          mediaRange.value = percent;
-          const clickTime = (percent * Number(player.getDuration())) / 100;
-          player.seekTo(clickTime);
-          getCurrentHightlightIndex(0);
+
+        mediaRanges.forEach((mediaRange) =>
+          mediaRange.addEventListener("change", (event) => {
+            const percent = Number(event.target.value);
+            mediaRange.value = percent;
+            const clickTime = (percent * Number(player.getDuration())) / 100;
+            player.seekTo(clickTime);
+            getCurrentHightlightIndex(0);
+          }),
+        );
+
+        document.addEventListener("keyup", (e) => {
+          if (e.code === "Space") {
+            mediaBtnClick();
+            return;
+          }
+
+          if (e.code === "ArrowLeft") {
+            rewind10();
+            return;
+          }
+
+          if (e.code === "ArrowRight") {
+            fw10();
+            return;
+          }
         });
 
         Array.from(document.querySelectorAll(".bar")).map((el) =>
