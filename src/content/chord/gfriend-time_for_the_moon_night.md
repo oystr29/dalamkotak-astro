@@ -20,11 +20,11 @@ Ebmaj9...|Am11...|G#maj7...|C#9...|,0:25
 F#maj7.G#.|Fm.Bbm7.|F#maj7.G#...|Bbmaj7...|,0:36
 
 [pre-chorus]
-F#...|Bm...|Bbm7...|Ebm7...|,0:48
+F#...|Bm...|Bbm7...|Ebm7...|,0:47
 Cm7-5.F7.|Bbm7.Ebm7.|G#m...|Bbsus4.Bb.|,0:59
 
 [chorus-a.]
-Ebm...|C#...|B...|F#/Bb...|,1:11
+Ebm...|C#...|B...|F#/Bb...|,1:10
 G#m...|F#6...|Fm7-5...|Bb...|,1:16
 B...|C#/B...|Bbm...|Ebm7...|,1:22
 G#m...|F#/Bb...|B...|C#9...|,1:28
