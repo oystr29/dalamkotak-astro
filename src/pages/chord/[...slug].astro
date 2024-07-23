@@ -6,7 +6,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { Icon } from "astro-icon/components";
 import ChordLayout from "../../layouts/ChordLayout.astro";
 import ChordSidebar from "~/components/ChordSidebar.astro";
-import * as chord_md from "../../content/chord/gfriend-time_for_the_moon_night.md";
 import "dayjs/locale/id";
 
 dayjs.extend(relativeTime);
@@ -21,6 +20,13 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"chord">;
 
 const chord = Astro.props;
+const globs = await Astro.glob<Props["data"]>(`../../content/chord/*.md`);
+const chord_md = globs.filter(
+  (glob) =>
+    `${glob.frontmatter.title}-${glob.frontmatter.artist}` ===
+    `${chord.data.title}-${chord.data.artist}`,
+)[0];
+console.log(chord_md.rawContent());
 
 const data: Record<string, { bar: string; time: string }[]> = {};
 let rec_data = "";
@@ -32,13 +38,11 @@ chord_md
     if (/\[(.*?)\]/.test(v)) {
       data[v] = [];
       rec_data = v;
-      console.log(v);
       return;
     }
     const [bar, time] = v.split(",");
     data[rec_data].push({ bar, time });
   });
-console.log(data);
 ---
 
 <!doctype html>
@@ -51,16 +55,16 @@ console.log(data);
     />
   </head>
   <body
-    class="bg-gray-950 text-white p-2 flex flex-col flex-1 h-screen overflow-y-hidden"
+    class="bg-gray-950 text-white md:p-2 flex flex-col flex-1 h-screen overflow-y-hidden"
   >
     <main class="flex gap-4 flex-1">
       <ChordSidebar />
       <section
-        class="flex items-center flex-col basis-4/5 flex-1 text-white bg-red-950 p-4 rounded-lg"
+        class="flex items-center flex-col basis-4/5 flex-1 text-white bg-red-950 p-4 md:rounded-lg"
       >
         <div
           id="chord-container"
-          class="h-screen overflow-y-auto pr-6 text-4xl font-bold scrollbar-thin scrollbar-track-red-950 scrollbar-thumb-red-950 pb-64 scroll-smooth"
+          class="h-screen overflow-y-auto pr-6 text-sm md:text-lg xl:text-4xl font-bold scrollbar-thin scrollbar-track-red-950 scrollbar-thumb-red-950 pb-64 scroll-smooth"
         >
           {
             Object.keys(data).map((key, i) => {
@@ -93,7 +97,7 @@ console.log(data);
                                 ? ""
                                 : minTo * 60 + secTo
                             }
-                            class="text-white/10 mb-1 bar scroll-mt-8"
+                            class="text-white/10 mb-1 bar scroll-mt-8 cursor-pointer hover:text-white/40"
                             style="color: rgb(255 255 255 / 0.1);"
                           >
                             {v.bar}
@@ -109,7 +113,7 @@ console.log(data);
         </div>
       </section>
       <div
-        class="fixed bottom-0 left-0 z-50 flex w-full flex-1 items-center gap-3 rounded-lg rounded-b-none border bg-slate-950 p-2"
+        class="fixed bottom-0 left-0 z-50 flex w-full flex-1 items-center gap-3 rounded-lg rounded-b-none bg-red-950 md:bg-slate-950 p-2 px-6"
       >
         <div class="flex items-center justify-between flex-1">
           <div class="flex items-center gap-6 text-lg">
@@ -120,12 +124,12 @@ console.log(data);
               src={`https://www.youtube.com/embed/${chord.data.ytID}?enablejsapi=1&autoplay=1`}
               frameborder="0"
               style="border: solid 4px #37474F"></iframe>
-            <div>
+            <div class="hidden md:block">
               <p class="font-bold">{chord.data.title}</p>
               <p>{chord.data.artist}</p>
             </div>
           </div>
-          <div class="flex flex-col items-center gap-4">
+          <div class="flex md:flex-col flex-col-reverse items-center gap-4">
             <div class="flex items-center gap-4">
               <Icon
                 id="rewind10"
@@ -156,9 +160,16 @@ console.log(data);
                 class="w-8 h-8 hover:scale-110 transition"
               />
             </div>
-            <div class="flex items-center gap-4">
+            <div class="hidden md:flex items-center gap-4">
               <p id="curr-time"></p>
-              <div
+
+              <input
+                id="media-range"
+                type="range"
+                value="0"
+                class="block w-[300px] text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring"
+              />
+              <!-- <div
                 class="w-[300px] bg-gray-200 rounded-full h-1.5 dark:bg-gray-700"
               >
                 <div
@@ -167,18 +178,17 @@ console.log(data);
                   id="progress-bar"
                 >
                 </div>
-              </div>
+              </div> -->
               <p id="total-time"></p>
             </div>
           </div>
-          <div id="status">makan</div>
+          <Icon name="mdi:heart-outline" class="h-8 w-8" />
           <div class="hidden"></div>
         </div>
       </div>
       <script type="text/javascript" is:inline>
         const chordContainer = document.querySelector("#chord-container");
-
-        const topPos = chordContainer.offsetTop;
+        const mediaRange = document.querySelector("#media-range");
 
         function scrollTo(element, to, duration) {
           var start = element.scrollTop,
@@ -239,6 +249,29 @@ console.log(data);
 
         var player;
         let index = 0;
+        const getCurrentHightlightIndex = (start) => {
+          const currTime = parseInt(player.getCurrentTime());
+          for (let i = start; i < timeFrom.length; i++) {
+            const time = timeFrom[i];
+
+            if (i === timeFrom.length - 1 && currTime < time) {
+              index = -1;
+              break;
+            }
+
+            if (i === timeFrom.length - 1 && currTime > time) {
+              index = i;
+              break;
+            }
+
+            if (time <= currTime && timeFrom[i + 1] >= currTime) {
+              index = i;
+              break;
+            }
+
+            index = i;
+          }
+        };
         const intervalFunc = () => {
           if (player) {
             const currTime = parseInt(player.getCurrentTime());
@@ -246,43 +279,15 @@ console.log(data);
             const second = currTime - minutes * 60;
             const curr_time_dom = `${minutes}:${second.toString().length === 1 ? `0${second}` : second}`;
             document.querySelector("#curr-time").innerHTML = curr_time_dom;
-            document.querySelector("#progress-bar").style.width =
-              `${(parseInt(player.getCurrentTime()) / player.getDuration()) * 100}%`;
+            mediaRange.value = `${(parseInt(player.getCurrentTime()) / player.getDuration()) * 100}`;
 
-            for (let i = index; i < timeFrom.length; i++) {
-              const time = timeFrom[i];
-              if (i === timeFrom.length - 1 && currTime > time) {
-                index = i;
-                break;
-              }
-
-              if (time <= currTime && timeFrom[i + 1] >= currTime) {
-                index = i;
-                break;
-              }
-
-              index = i;
-            }
-
-            timeFrom.some((v, i) => {
-              const time = Number(v);
-              if (i === timeFrom?.length - 1 && currTime > time) {
-                index = i;
-                return true;
-              }
-
-              if (time <= currTime && Number(timeFrom[i + 1]) >= currTime) {
-                index = i;
-                return true;
-              }
-
-              index = i;
-            });
+            getCurrentHightlightIndex(index);
 
             const hightlightEl = document.querySelector(
               `[data-from='${timeFrom[index]}']`,
             );
-            if (player.getPlayerState() == 1 && hightlightEl) {
+
+            if (player.getPlayerState() == 1 && hightlightEl && index >= 0) {
               if (prev_time != -1) {
                 document.querySelector(
                   `[data-from='${prev_time}']`,
@@ -306,14 +311,12 @@ console.log(data);
               playsinline: 1,
             },
             events: {
-              onApiChange: (event) => {},
               onReady: (event) => {
                 const duration = event.target.getDuration();
                 const minutes = Math.floor(duration / 60);
                 const second = duration - minutes * 60;
 
                 document.getElementById("player").style.borderColor = "#FF6D00";
-                document.querySelector("#status").innerHTML = "cued";
                 document.querySelector("#curr-time").innerHTML = `0:00`;
                 document.querySelector("#total-time").innerHTML =
                   `${minutes}:${second}`;
@@ -350,14 +353,12 @@ console.log(data);
                 if (color) {
                   document.getElementById("player").style.borderColor = color;
                 }
-                if (status) {
-                  document.querySelector("#status").innerHTML = status;
-                }
               },
             },
           });
         }
 
+        // outside track run correctly
         document.querySelector("#mediabtn").addEventListener("click", () => {
           const state = player.getPlayerState();
           if (state == 1) {
@@ -377,6 +378,7 @@ console.log(data);
             return;
           }
           player.seekTo(seek);
+          getCurrentHightlightIndex(0);
         });
         document.querySelector("#fw10").addEventListener("click", () => {
           const time = player.getCurrentTime();
@@ -388,7 +390,25 @@ console.log(data);
           }
 
           player.seekTo(seek);
+          getCurrentHightlightIndex(0);
         });
+        // persent = current/duration * 100
+        // persent *100/duration = current
+        mediaRange.addEventListener("change", (event) => {
+          const percent = Number(event.target.value);
+          mediaRange.value = percent;
+          const clickTime = (percent * Number(player.getDuration())) / 100;
+          player.seekTo(clickTime);
+          getCurrentHightlightIndex(0);
+        });
+
+        Array.from(document.querySelectorAll(".bar")).map((el) =>
+          el.addEventListener("click", (e) => {
+            player.playVideo();
+            player.seekTo(Number(e.target.getAttribute("data-from")) + 1);
+            getCurrentHightlightIndex(0);
+          }),
+        );
       </script>
     </main>
   </body>
