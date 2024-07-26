@@ -128,12 +128,13 @@ chord_md
 
         <div class="flex items-center justify-between flex-1">
           <div class="flex items-center gap-6 text-lg">
-            <iframe
+            <div data-videoid={chord.data.ytID} id="player"></div>
+            <!-- <iframe
               id="player"
               width="100"
               height="100"
               src={`https://www.youtube.com/embed/${chord.data.ytID}?enablejsapi=1&playsinline=1&host=https://www.youtube.com&controls=0`}
-              style="border: solid 4px #37474F"></iframe>
+              style="border: solid 4px #37474F"></iframe> -->
             <div class="hidden md:block">
               <p class="font-bold">{chord.data.title}</p>
               <p>{chord.data.artist}</p>
@@ -310,48 +311,27 @@ chord_md
         let interval;
         let ytRedBtn;
 
+        const videoId = document
+          .querySelector("#player")
+          .getAttribute("data-videoid");
         function onYouTubeIframeAPIReady() {
           player = new YT.Player("player", {
+            height: "100",
+            width: "100",
+            videoId,
+            playerVars: { controls: 0, showinfo: 0, rel: 0 },
             events: {
               onReady: (event) => {
                 const duration = event.target.getDuration();
                 const minutes = Math.floor(duration / 60);
                 const second = duration - minutes * 60;
 
-                ytRedBtn = document.querySelector(
-                  "#movie_player > div.ytp-cued-thumbnail-overlay > button",
-                );
-                console.log(event);
                 document.getElementById("player").style.borderColor = "#FF6D00";
                 currTimes.forEach((currTime) => (currTime.innerHTML = "0:00"));
                 totalTimes.forEach(
                   (totalTimes) =>
                     (totalTimes.innerHTML = `${minutes}:${second}`),
                 );
-
-                // Wait for the iframe to load completely
-                setTimeout(() => {
-                  try {
-                    const iframe = document.getElementById("player");
-                    const iframeDocument =
-                      iframe.contentDocument || iframe.contentWindow.document;
-
-                    // Example of attempting to select an element within the iframe (This won't work due to cross-origin)
-                    const redButton = iframeDocument.querySelector(
-                      "#movie_player > div.ytp-cued-thumbnail-overlay > button",
-                    );
-
-                    // If you find the button, you can manipulate it (assuming same-origin, which isn't the case with YouTube)
-                    if (redButton) {
-                      redButton.style.backgroundColor = "blue";
-                    }
-                  } catch (error) {
-                    console.error(
-                      "Cannot access iframe contents due to cross-origin restrictions:",
-                      error,
-                    );
-                  }
-                }, 1000);
               },
               onStateChange: (event) => {
                 const playerStatus = event.data;
@@ -396,15 +376,7 @@ chord_md
           });
         }
 
-        let firstTime = true;
-        // outside track run correctly
         function mediaBtnClick() {
-          console.log(ytRedBtn);
-          if (firstTime && ytRedBtn) {
-            ytRedBtn.click();
-            firstTime = false;
-            return;
-          }
           const state = player.getPlayerState();
           if (state == 1) {
             btnMedia.pause();
@@ -421,6 +393,7 @@ chord_md
 
         function rewind10() {
           const time = player.getCurrentTime();
+          console.log(time);
           const seek = Number(time) - 10;
           if (seek < 0) {
             player.seekTo(0);
@@ -430,9 +403,7 @@ chord_md
           getCurrentHightlightIndex(0);
         }
 
-        document
-          .querySelector("#rewind10")
-          .addEventListener("click", () => rewind10);
+        document.querySelector("#rewind10").addEventListener("click", rewind10);
 
         function fw10() {
           const time = player.getCurrentTime();
@@ -486,5 +457,10 @@ chord_md
         );
       </script>
     </main>
+    <style>
+      .bar:hover {
+        color: blue;
+      }
+    </style>
   </body>
 </html>
