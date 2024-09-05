@@ -1,0 +1,13 @@
+---
+title: Mago
+artist: Gfriend
+album: Walpulgis Night
+releaseDate: "Jul 13 2020"
+img: https://images.genius.com/71e7c99e7b06c31d55e8bf392b55cf1d.300x300x1.jpg
+ytID: rFoqjKv6goU
+---
+
+[intro]
+Bm7...|E...|
+
+

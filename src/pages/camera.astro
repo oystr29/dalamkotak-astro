@@ -1,0 +1,17 @@
+---
+import BaseHead from "~/components/BaseHead.astro";
+import Webcam from "~/components/svelte/webcam.svelte";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={"Seminar Proposal"}
+      description={"Presentation Slide of Sempro"}
+    />
+  </head>
+  <body class="">
+    <Webcam client:only="svelte" />
+  </body>
+</html>

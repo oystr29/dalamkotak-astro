@@ -8,6 +8,8 @@ import ChordLayout from "../../layouts/ChordLayout.astro";
 import ChordSidebar from "~/components/ChordSidebar.astro";
 import "dayjs/locale/id";
 
+export const prerender = true;
+
 dayjs.extend(relativeTime);
 
 export async function getStaticPaths() {
