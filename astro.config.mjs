@@ -6,13 +6,10 @@ import svelte from "@astrojs/svelte";
 import netlify from "@astrojs/netlify";
 import icon from "astro-icon";
 
-import auth from "auth-astro";
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://dalamkotak.com",
-  integrations: [mdx(), sitemap(), tailwind(), svelte(), icon(), auth()],
-  output: "server",
+  integrations: [mdx(), sitemap(), tailwind(), svelte(), icon()],
+  output: "hybrid",
   adapter: netlify(),
 });
-
